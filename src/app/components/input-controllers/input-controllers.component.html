@@ -1,50 +1,8 @@
 <h2>Input Controllers</h2>
 <div class="container d-flex flex-row flex-wrap">
-  <div class="" *ngFor="let controller of (inputControllers$ | async)">
-    <div class="card m-2" style="min-width: 18rem">
-      <div class="card-header">
-        {{ controller.name }}
-      </div>
-      <div class="card-body">
-        <dl>
-          <dt>Polling</dt>
-          <dd>{{ controller.pollingRate === 'no-polling' ? 'none' : controller.pollingRate + 'ms' }}</dd>
-          <dt>Id</dt>
-          <dd>{{ controller.id }}</dd>
-        </dl>
-        <div class="container">
-          <div class="row">
-            <div class="col-12 col-md-6 p-0 p-md-3" style="border-right: 1px solid">
-              <h5>Axes</h5>
-              <table class="table">
-                <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Value</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let axis of controller.axes">
-                  <td>{{ axis.index }}</td>
-                  <td>
-                    <app-visualizer-slider [value]="(axis.value | async)"></app-visualizer-slider>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-12 col-md-6 p-0 p-md-3" style="max-width: 200px">
-              <h5>Buttons</h5>
-              <div class="d-flex flex-wrap">
-                <div *ngFor="let button of controller.buttons">
-                  <app-visualizer-button [value]="button.index" [buttonActive]="(button.value | async)">
-                  </app-visualizer-button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-input-controller-detail *ngFor="let controller of (inputControllers$ | async)"
+                               [controller]="controller"
+  >
+
+  </app-input-controller-detail>
 </div>

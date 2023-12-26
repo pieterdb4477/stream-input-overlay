@@ -21,7 +21,7 @@ export class DebugComponent implements OnInit, OnDestroy {
   public supportedByBrowser = !!navigator['getGamepads'];
   public axesDebug: string = 'waiting';
   public buttonsDebug: string = 'waiting';
-  private polling: Subscription | undefined;
+  private polling: Observable<number> | undefined;
   public intervalIndex = 0;
 
   constructor() {
@@ -29,14 +29,14 @@ export class DebugComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.polling?.unsubscribe();
   }
 
 
   protected readonly isSecureContext = isSecureContext;
 
   ngOnInit(): void {
-    this.polling = interval(300).subscribe(nextIntervalIndex => {
+    this.polling = interval(300);
+    this.polling.subscribe(nextIntervalIndex => {
       this.intervalIndex = nextIntervalIndex
       this.debugAxes();
       this.debugButtons();

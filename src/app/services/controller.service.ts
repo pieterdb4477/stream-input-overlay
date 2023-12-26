@@ -35,7 +35,6 @@ export class ControllerService {
     let gamepads: Gamepad[] = (navigator.getGamepads() as Gamepad[])
       .filter(gamepad => gamepad != null);
     if (gamepads.length === 0) {
-      console.warn("No gamepads connected")
       this.inputControllers = [];
       return;
     }

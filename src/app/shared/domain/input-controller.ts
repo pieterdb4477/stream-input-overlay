@@ -4,6 +4,7 @@ export interface InputController {
   readonly kind: string;
   readonly id: string;
   readonly axes: Axis[];
+  readonly buttons: Button[];
   readonly hotSwappable: boolean;
   pollingRate: number | 'no-polling';
 }
@@ -17,6 +18,6 @@ export interface Axis {
 export interface Button {
   readonly name: string;
   readonly index: number;
-  value: Observable<void>
+  value: Observable<boolean>
 }
 

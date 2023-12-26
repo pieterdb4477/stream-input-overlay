@@ -28,9 +28,8 @@ class GamepadAxis implements Axis {
 
   get value(): Observable<number> {
     return this.valueSubject.pipe(
-      distinct(),
-      tap(nextValue => console.debug(`axis change ${this.name} -> ${nextValue}`)
-      ));
+      distinct()
+      );
   }
 
   constructor(public readonly index: number, public readonly gamepadIndex: number) {
@@ -55,8 +54,7 @@ class GamepadButton implements Button {
   get value(): Observable<boolean> {
     return this.valueSubject.pipe(
       distinct(),
-      tap(nextValue => console.debug(`button change ${this.name} -> ${nextValue}`)
-      ));
+      );
   }
 
   constructor(public readonly index: number, public readonly gamepadIndex: number) {

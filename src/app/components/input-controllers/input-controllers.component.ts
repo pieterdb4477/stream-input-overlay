@@ -4,6 +4,7 @@ import {InputController} from "../../shared/domain/input-controller";
 import {ControllerService} from "../../services/controller.service";
 import {AsyncPipe, NgForOf} from "@angular/common";
 import {VisualizerSliderComponent} from "../visualizers/visualizer-slider/visualizer-slider.component";
+import {VisualizerButtonComponent} from "../visualizers/visualizer-button/visualizer-button.component";
 
 @Component({
   selector: 'app-input-controllers',
@@ -11,7 +12,8 @@ import {VisualizerSliderComponent} from "../visualizers/visualizer-slider/visual
   imports: [
     AsyncPipe,
     NgForOf,
-    VisualizerSliderComponent
+    VisualizerSliderComponent,
+    VisualizerButtonComponent
   ],
   templateUrl: './input-controllers.component.html',
   styles: ``

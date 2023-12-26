@@ -1,4 +1,4 @@
-<div class="container" *ngIf="inputControllers$">
+<div class="container">
   <article>
     <h2>Checks</h2>
     <ul>
@@ -7,16 +7,17 @@
     </ul>
   </article>
   <article>
-    <input type="button" (click)="refresh()" value="Force refresh">
-    <h2>List of controllers ({{ (inputControllers$ | async)?.length }})</h2>
-    <div *ngFor="let inputController of (inputControllers$ | async)">
+    <h2>Axes</h2>
+    <p>Debug tick: {{intervalIndex}}</p>
     <pre>
-      {{inputController.kind}}
-      {{inputController.id}}
-      <ng-container *ngFor="let axis of inputController.axes">
-        -{{axis.index}}
-      </ng-container>
+      {{ axesDebug }}
     </pre>
-    </div>
+  </article>
+  <article>
+    <h2>Buttons</h2>
+    <p>Debug tick: {{intervalIndex}}</p>
+    <pre>
+      {{ buttonsDebug }}
+    </pre>
   </article>
 </div>

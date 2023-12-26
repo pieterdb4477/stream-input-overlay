@@ -1,27 +1,27 @@
-<div class="container">
-  <h2>Input Controllers</h2>
-    <div class="d-flex" *ngFor="let controller of (inputControllers$ | async)">
-      <div class="card" style="width: 18rem">
-        <div class="card-header">
-          {{ controller.id }}
-        </div>
-        <div class="card-body">
-          <h5>Axes</h5>
-          <table class="table">
-            <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let axis of controller.axes">
-              <td>{{ axis.index }}</td>
-              <td>{{ (axis.value | async) }}</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
+<h2>Input Controllers</h2>
+<div class="container d-flex flex-row">
+  <div class="" *ngFor="let controller of (inputControllers$ | async)">
+    <div class="card m-2" style="width: 18rem">
+      <div class="card-header">
+        {{ controller.id }}
+      </div>
+      <div class="card-body">
+        <h5>Axes</h5>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Value</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let axis of controller.axes">
+            <td>{{ axis.index }}</td>
+            <td>{{ (axis.value | async) }}</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
 </div>

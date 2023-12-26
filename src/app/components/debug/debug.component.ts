@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
-import {ControllerService} from "../../services/controller.service";
-import {Observable} from "rxjs";
+import {interval, Observable, Subscription} from "rxjs";
 import {InputController} from "../../shared/domain/input-controller";
 
 @Component({
@@ -16,23 +15,53 @@ import {InputController} from "../../shared/domain/input-controller";
   templateUrl: './debug.component.html',
   styles: ``
 })
-export class DebugComponent implements OnInit {
+export class DebugComponent implements OnInit, OnDestroy {
 
   public inputControllers$: Observable<InputController[]> | undefined;
   public supportedByBrowser = !!navigator['getGamepads'];
+  public axesDebug: string = 'waiting';
+  public buttonsDebug: string = 'waiting';
+  private polling: Subscription | undefined;
+  public intervalIndex = 0;
 
-
-  constructor(private gamepadService: ControllerService) {
+  constructor() {
+    const gamepads = navigator.getGamepads();
   }
 
-  ngOnInit(): void {
-    this.inputControllers$ = this.gamepadService.inputControllers$;
+  ngOnDestroy(): void {
+    this.polling?.unsubscribe();
   }
 
-  public refresh(): void {
-    this.gamepadService.forceUpdate();
-  }
 
   protected readonly isSecureContext = isSecureContext;
 
+  ngOnInit(): void {
+    this.polling = interval(300).subscribe(nextIntervalIndex => {
+      this.intervalIndex = nextIntervalIndex
+      this.debugAxes();
+      this.debugButtons();
+    });
+  }
+
+  private debugAxes() {
+    this.axesDebug = navigator.getGamepads()
+      .filter(gp => gp != null)
+      .map(gamepad => {
+        // @ts-ignore
+        return gamepad.axes.map((value, index) => `${gamepad.index}x${index}: ${value}`)
+          .join('\n');
+      })
+      .join('\n');
+  }
+
+  private debugButtons() {
+    this.buttonsDebug = navigator.getGamepads()
+      .filter(gp => gp != null)
+      .map(gamepad => {
+        // @ts-ignore
+        return gamepad.buttons.map((value, index) => `${gamepad.index}x${index}: ${value.pressed}`)
+          .join('\n');
+      })
+      .join('\n');
+  }
 }

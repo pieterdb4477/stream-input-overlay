@@ -25,7 +25,9 @@ class GamepadAxis implements Axis {
   public name: string;
 
   get value(): Observable<number> {
-    return this.valueSubject.pipe(distinct());
+    return this.valueSubject.pipe(
+      // distinct()
+    );
   }
 
   constructor(index: number, private gamePad: Gamepad) {
@@ -35,6 +37,7 @@ class GamepadAxis implements Axis {
 
   poll() {
     this.valueSubject.next(this.gamePad.axes[this.index]);
+    if(this.index === 0) console.debug(this.gamePad.axes[this.index]);
   }
 
 }

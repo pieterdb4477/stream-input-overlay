@@ -1,8 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {AsyncPipe, NgForOf} from "@angular/common";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {VisualizerButtonComponent} from "../visualizers/visualizer-button/visualizer-button.component";
 import {VisualizerSliderComponent} from "../visualizers/visualizer-slider/visualizer-slider.component";
 import {InputController} from "../../shared/domain/input-controller";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-input-controller-detail',
@@ -11,16 +12,33 @@ import {InputController} from "../../shared/domain/input-controller";
     AsyncPipe,
     NgForOf,
     VisualizerButtonComponent,
-    VisualizerSliderComponent
+    VisualizerSliderComponent,
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './input-controller-detail.component.html',
   styleUrl: './input-controller-detail.component.scss'
 })
 export class InputControllerDetailComponent {
+  // @ts-ignore
+  private _controller: InputController;
+  // @ts-ignore
+  public nameControl: FormControl;
+
 
   @Input()
-  public controller!: InputController;
+  public set controller(controller: InputController) {
+    this._controller = controller;
+    this.nameControl = new FormControl(controller.name);
+    this.nameControl.valueChanges.subscribe(nextName => controller.name = nextName);
+  }
 
+  public get controller(): InputController {
+    return this._controller;
+  }
 
+  public get ready(): boolean {
+    return !!(this._controller && this.nameControl);
+  }
 
 }

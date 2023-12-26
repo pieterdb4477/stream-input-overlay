@@ -9,15 +9,15 @@ export interface InputController {
   pollingRate: number | 'no-polling';
 }
 
-export interface Axis {
-  readonly index: number;
-  name: string;
-  value: Observable<number>
+export interface Axis extends InputControllerEntity<number>{
 }
 
-export interface Button {
+export interface Button extends InputControllerEntity<boolean> {
+}
+
+interface InputControllerEntity<T> {
   readonly name: string;
   readonly index: number;
-  value: Observable<boolean>
+  value: Observable<T>;
 }
 

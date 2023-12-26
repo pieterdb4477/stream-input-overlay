@@ -3,13 +3,15 @@ import {Observable} from "rxjs";
 import {InputController} from "../../shared/domain/input-controller";
 import {ControllerService} from "../../services/controller.service";
 import {AsyncPipe, NgForOf} from "@angular/common";
+import {VisualizerSliderComponent} from "../visualizers/visualizer-slider/visualizer-slider.component";
 
 @Component({
   selector: 'app-input-controllers',
   standalone: true,
   imports: [
     AsyncPipe,
-    NgForOf
+    NgForOf,
+    VisualizerSliderComponent
   ],
   templateUrl: './input-controllers.component.html',
   styles: ``

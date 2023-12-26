@@ -6,10 +6,10 @@
         {{ controller.id }}
       </div>
       <div class="card-body">
-        <div class="container">
           <p>
             Polling: {{ controller.pollingRate === 'no-polling' ? 'none' : controller.pollingRate + 'ms' }}
           </p>
+        <div class="container">
           <div class="col-12 col-md-6">
             <h5>Axes</h5>
             <table class="table">
@@ -22,13 +22,13 @@
               <tbody>
               <tr *ngFor="let axis of controller.axes">
                 <td>{{ axis.index }}</td>
-                <td>{{ (axis.value | async) }}</td>
+                <td>
+                <app-visualizer-slider [value]="(axis.value | async)"></app-visualizer-slider>
+                </td>
               </tr>
               </tbody>
             </table>
           </div>
-        </div>
-        <div class="container">
           <div class="col-12 col-md-6">
             <h5>Buttons</h5>
             <table class="table">

@@ -1,5 +1,4 @@
 $size: 2rem;
-
 .visualizer-button {
   border: 1px solid white;
   width: $size;
@@ -10,8 +9,9 @@ $size: 2rem;
   transition-property: background, color;
   transition-duration: 300ms;
   color: var(--bs-body-color);
+
   &.active {
     color: var(--bs-body-bg);
-    background-color:var(--bs-body-color);
+    background-color: var(--bs-body-color);
   }
 }

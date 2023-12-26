@@ -19,12 +19,17 @@ export class GamepadController implements InputController {
     this.buttons = gamepad.buttons.map((value, index) => new GamepadButton(index, gamepad.index));
     this.name = this.parseName(gamepad);
     this.id = this.parseId(gamepad);
-
-    //TODO PDB : pollingrate won't change the interval on change
+    //TODO PDB : polling rate won't change the interval on change
     this.polling = interval(pollingRate).subscribe((intervalNumber) => {
       this.axes.forEach(axis => axis.poll());
       this.buttons.forEach(button => button.poll());
     });
+
+    if (gamepad.id.includes('STANDARD GAMEPAD')) {
+      console.debug(`gamepad ${gamepad.id} seems to have a default layout, assigning axes to thumbsticks`)
+      this.autoAssignThumbsticks();
+      this.autoAssignDirectionalPads();
+    }
   }
 
   private parseId(gamepad: Gamepad): string {
@@ -52,6 +57,28 @@ export class GamepadController implements InputController {
     }
   }
 
+  private autoAssignThumbsticks() {
+    this.thumbSticks = [
+      {
+        verticalAxis: this.axes[1],
+        horizontalAxis: this.axes[0]
+      }, {
+        verticalAxis: this.axes[3],
+        horizontalAxis: this.axes[2]
+      }
+    ]
+  }
+
+  private autoAssignDirectionalPads() {
+    this.directionalPads = [
+      {
+        up: this.buttons[12],
+        down: this.buttons[13],
+        left: this.buttons[14],
+        right: this.buttons[15],
+      }
+    ]
+  }
 }
 
 class GamepadAxis implements Axis {

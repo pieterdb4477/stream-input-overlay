@@ -45,8 +45,12 @@
             <!-- TODO PDB: don't show this if < 2 axis -->
             <h5>Thumbsticks</h5>
             <div *ngFor="let thumbStick of controller.thumbSticks">
+              Horizontal
+              <app-visualizer-slider [value]="(thumbStick.horizontalAxis.value | async)"></app-visualizer-slider>
+              Vertical
+              <app-visualizer-slider [value]="(thumbStick.verticalAxis.value | async)"></app-visualizer-slider>
             </div>
-            <div *ngIf="controller.thumbSticks">
+            <div>
               <button class="btn btn-link">Create thumbstick</button>
             </div>
           </div>
@@ -54,8 +58,10 @@
             <!-- TODO PDB: don't show this if < 4 buttons -->
             <h5>Directional Pads</h5>
             <div *ngFor="let directionalPad of controller.directionalPads">
+              <app-visualizer-directional-pad [directionalPad]="directionalPad">
+              </app-visualizer-directional-pad>
             </div>
-            <div *ngIf="controller.directionalPads">
+            <div>
               <button class="btn btn-link">Create d-pad</button>
             </div>
           </div>

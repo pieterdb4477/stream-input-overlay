@@ -1,9 +1,12 @@
 import {Component, Input} from '@angular/core';
-import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {VisualizerButtonComponent} from "../visualizers/visualizer-button/visualizer-button.component";
 import {VisualizerSliderComponent} from "../visualizers/visualizer-slider/visualizer-slider.component";
 import {InputController} from "../../shared/domain/input-controller";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {
+  VisualizerDirectionalPadComponent
+} from "../visualizers/visualizer-directional-pad/visualizer-directional-pad.component";
 
 @Component({
   selector: 'app-input-controller-detail',
@@ -14,7 +17,9 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
     VisualizerButtonComponent,
     VisualizerSliderComponent,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    JsonPipe,
+    VisualizerDirectionalPadComponent
   ],
   templateUrl: './input-controller-detail.component.html',
   styleUrl: './input-controller-detail.component.scss'

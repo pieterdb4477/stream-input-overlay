@@ -2,3 +2,9 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+input {
+  border: 0;
+  border-bottom: 1px solid var(--bs-primary-border-subtle);
+  background: transparent;
+}

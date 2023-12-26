@@ -6,6 +6,7 @@ export interface InputController {
   readonly axes: Axis[];
   readonly buttons: Button[];
   readonly hotSwappable: boolean;
+  name: string;
   pollingRate: number | 'no-polling';
 }
 

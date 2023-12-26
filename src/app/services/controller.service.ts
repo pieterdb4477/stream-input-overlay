@@ -38,7 +38,7 @@ export class ControllerService {
       this.inputControllers = [];
       return;
     }
-    this.inputControllers = gamepads.map(gamepad => new GamepadController(gamepad, window));
+    this.inputControllers = gamepads.map(gamepad => new GamepadController(gamepad));
   }
 
   private set inputControllers(inputController: InputController[]) {

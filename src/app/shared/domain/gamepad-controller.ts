@@ -1,5 +1,5 @@
 import {Axis, Button, InputController} from "./input-controller";
-import {BehaviorSubject, distinct, interval, Observable, Subscription, tap} from "rxjs";
+import {BehaviorSubject, distinct, interval, Observable, Subscription} from "rxjs";
 
 export class GamepadController implements InputController {
 
@@ -9,16 +9,45 @@ export class GamepadController implements InputController {
   readonly axes: GamepadAxis[] = [];
   readonly buttons: GamepadButton[] = [];
   readonly hotSwappable = true;
+  readonly name: string;
 
-  constructor(gamepad: Gamepad, window: Window, public pollingRate = 100) {
+  constructor(gamepad: Gamepad, public pollingRate = 100) {
     this.id = gamepad.id;
     this.axes = gamepad.axes.map((value, index) => new GamepadAxis(index, gamepad.index));
     this.buttons = gamepad.buttons.map((value, index) => new GamepadButton(index, gamepad.index));
+    this.name = this.parseName(gamepad);
+    this.id = this.parseId(gamepad);
+
     //TODO PDB : pollingrate won't change the interval on change
     this.polling = interval(pollingRate).subscribe((intervalNumber) => {
       this.axes.forEach(axis => axis.poll());
       this.buttons.forEach(button => button.poll());
     });
+  }
+
+  private parseId(gamepad: Gamepad): string {
+    const vendorRegex = /Vendor: ([a-z0-9]+)/;
+    const productRegex = /Product: ([a-z0-9]+)/;
+    const vendorResult = vendorRegex.exec(this.id);
+    const productResult = productRegex.exec(this.id);
+    if (vendorResult === null || productResult == null) {
+      console.warn(`Could not parse details from gamepad id '${gamepad.id}'`)
+      return gamepad.id;
+    } else {
+      return `${vendorResult[1]}:${productResult[1]}`;
+    }
+  }
+
+  private parseName(gamepad: Gamepad): string {
+    const nameParseRegex = /^(.*?)\(/;
+    const regexResult = nameParseRegex.exec(gamepad.id);
+
+    if (regexResult === null || !regexResult[1]) {
+      console.warn(`Could not parse name from ${gamepad.id}`)
+      return gamepad.id;
+    } else {
+      return regexResult[1].trim();
+    }
   }
 }
 
@@ -29,7 +58,7 @@ class GamepadAxis implements Axis {
   get value(): Observable<number> {
     return this.valueSubject.pipe(
       distinct()
-      );
+    );
   }
 
   constructor(public readonly index: number, public readonly gamepadIndex: number) {
@@ -45,6 +74,7 @@ class GamepadAxis implements Axis {
     this.valueSubject.next(value);
   }
 }
+
 //TODO PDB lots of duplication between buttons and axes
 class GamepadButton implements Button {
   readonly valueSubject = new BehaviorSubject<boolean>(false);
@@ -54,7 +84,7 @@ class GamepadButton implements Button {
   get value(): Observable<boolean> {
     return this.valueSubject.pipe(
       distinct(),
-      );
+    );
   }
 
   constructor(public readonly index: number, public readonly gamepadIndex: number) {

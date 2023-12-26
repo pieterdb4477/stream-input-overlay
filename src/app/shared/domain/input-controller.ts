@@ -8,6 +8,8 @@ export interface InputController {
   readonly hotSwappable: boolean;
   name: string;
   pollingRate: number | 'no-polling';
+  directionalPads : DirectionPad[];
+  thumbSticks: ThumbStick[];
 }
 
 export interface Axis extends InputControllerEntity<number>{
@@ -22,3 +24,14 @@ interface InputControllerEntity<T> {
   value: Observable<T>;
 }
 
+export type ThumbStick = {
+  verticalAxis: Axis;
+  horizontalAxis: Axis;
+}
+
+export type DirectionPad = {
+  up : Button;
+  down : Button;
+  left : Button;
+  right : Button;
+}

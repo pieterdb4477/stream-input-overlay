@@ -1,4 +1,4 @@
-import {Axis, Button, InputController} from "./input-controller";
+import {Axis, Button, DirectionPad, InputController, ThumbStick} from "./input-controller";
 import {BehaviorSubject, distinct, interval, Observable, Subscription} from "rxjs";
 
 export class GamepadController implements InputController {
@@ -10,6 +10,8 @@ export class GamepadController implements InputController {
   readonly buttons: GamepadButton[] = [];
   readonly hotSwappable = true;
   readonly name: string;
+  directionalPads: DirectionPad[] = [];
+  thumbSticks: ThumbStick[] = [];
 
   constructor(gamepad: Gamepad, public pollingRate = 100) {
     this.id = gamepad.id;
@@ -49,6 +51,7 @@ export class GamepadController implements InputController {
       return regexResult[1].trim();
     }
   }
+
 }
 
 class GamepadAxis implements Axis {

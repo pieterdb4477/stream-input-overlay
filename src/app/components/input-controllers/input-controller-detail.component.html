@@ -41,6 +41,24 @@
               </div>
             </div>
           </div>
+          <div class="col-12 col-md-6 p-0 p-md-3">
+            <!-- TODO PDB: don't show this if < 2 axis -->
+            <h5>Thumbsticks</h5>
+            <div *ngFor="let thumbStick of controller.thumbSticks">
+            </div>
+            <div *ngIf="controller.thumbSticks">
+              <button class="btn btn-link">Create thumbstick</button>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 p-0 p-md-3">
+            <!-- TODO PDB: don't show this if < 4 buttons -->
+            <h5>Directional Pads</h5>
+            <div *ngFor="let directionalPad of controller.directionalPads">
+            </div>
+            <div *ngIf="controller.directionalPads">
+              <button class="btn btn-link">Create d-pad</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

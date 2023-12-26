@@ -1,0 +1,18 @@
+<div class="container" *ngIf="gamepads$">
+  <article>
+    <h2>Checks</h2>
+    <ul>
+      <li>Secure context? {{isSecureContext}}</li>
+      <li>Browser support? {{(supportedByBrowser === undefined) ? '...' : supportedByBrowser}}</li>
+    </ul>
+  </article>
+  <article>
+    <input type="button" (click)="refresh()" value="Force refresh">
+    <h2>List of controllers ({{ (gamepads$ | async)?.length }})</h2>
+    <div *ngFor="let gamepad of (gamepads$ | async)">
+    <pre>
+      {{ gamepad | json }}
+    </pre>
+    </div>
+  </article>
+</div>

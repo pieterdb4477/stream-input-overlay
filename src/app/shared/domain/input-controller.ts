@@ -4,8 +4,8 @@ export interface InputController {
   readonly kind: string;
   readonly id: string;
   readonly axes: Axis[];
-  readonly requiresPolling: boolean;
   readonly hotSwappable: boolean;
+  pollingRate: number | 'no-polling';
 }
 
 export interface Axis {

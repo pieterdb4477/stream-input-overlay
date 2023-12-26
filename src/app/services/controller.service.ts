@@ -24,6 +24,7 @@ export class ControllerService {
     this.gamepadConnected$ = fromEvent<GamepadEvent>(this.window, "gamepadconnected")
     this.gamepadDisconnected$ = fromEvent<GamepadEvent>(this.window, "gamepaddisconnected")
     this.updateGamepadList();
+    this.gamepadConnected$.subscribe(() => this.updateGamepadList());
   }
 
   private updateGamepadList(): void {

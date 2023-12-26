@@ -7,13 +7,13 @@ export class GamepadController implements InputController {
   readonly kind = 'GamePad';
   readonly id: string
   readonly axes: GamepadAxis[] = [];
-  readonly requiresPolling = true;
   readonly hotSwappable = true;
 
-  constructor(gamePad: Gamepad, window: Window, pollRate = 100) {
+  constructor(gamePad: Gamepad, window: Window, public pollingRate = 100) {
     this.id = gamePad.id;
     this.axes = gamePad.axes.map((value, index) => new GamepadAxis(index, gamePad));
-    this.polling = interval(pollRate).subscribe(() => {
+    //TODO PDB : pollingrate won't change the interval on change
+    this.polling = interval(pollingRate).subscribe(() => {
       this.axes.forEach(axis => axis.poll());
     });
   }

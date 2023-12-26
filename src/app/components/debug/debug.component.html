@@ -1,4 +1,4 @@
-<div class="container" *ngIf="gamepads$">
+<div class="container" *ngIf="inputControllers$">
   <article>
     <h2>Checks</h2>
     <ul>
@@ -8,10 +8,14 @@
   </article>
   <article>
     <input type="button" (click)="refresh()" value="Force refresh">
-    <h2>List of controllers ({{ (gamepads$ | async)?.length }})</h2>
-    <div *ngFor="let gamepad of (gamepads$ | async)">
+    <h2>List of controllers ({{ (inputControllers$ | async)?.length }})</h2>
+    <div *ngFor="let inputController of (inputControllers$ | async)">
     <pre>
-      {{ gamepad | json }}
+      {{inputController.kind}}
+      {{inputController.id}}
+      <ng-container *ngFor="let axis of inputController.axes">
+        -{{axis.index}}
+      </ng-container>
     </pre>
     </div>
   </article>

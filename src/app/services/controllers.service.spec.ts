@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GamepadService } from './gamepad.service';
+import { ControllerService } from './controller.service';
 
 describe('ControllersService', () => {
-  let service: GamepadService;
+  let service: ControllerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(GamepadService);
+    service = TestBed.inject(ControllerService);
   });
 
   it('should be created', () => {

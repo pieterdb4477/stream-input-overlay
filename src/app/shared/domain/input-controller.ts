@@ -1,0 +1,22 @@
+import {Observable} from "rxjs";
+
+export interface InputController {
+  readonly kind: string;
+  readonly id: string;
+  readonly axes: Axis[];
+  readonly requiresPolling: boolean;
+  readonly hotSwappable: boolean;
+}
+
+export interface Axis {
+  readonly index: number;
+  name: string;
+  value: Observable<number>
+}
+
+export interface Button {
+  readonly name: string;
+  readonly index: number;
+  value: Observable<void>
+}
+

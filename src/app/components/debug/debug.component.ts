@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
-import {GamepadService} from "../../services/gamepad.service";
+import {ControllerService} from "../../services/controller.service";
 import {Observable} from "rxjs";
+import {InputController} from "../../shared/domain/input-controller";
 
 @Component({
   selector: 'app-debug',
@@ -17,15 +18,15 @@ import {Observable} from "rxjs";
 })
 export class DebugComponent implements OnInit {
 
-  public gamepads$: Observable<Gamepad[]> | undefined;
+  public inputControllers$: Observable<InputController[]> | undefined;
   public supportedByBrowser = !!navigator['getGamepads'];
 
 
-  constructor(private gamepadService: GamepadService) {
+  constructor(private gamepadService: ControllerService) {
   }
 
   ngOnInit(): void {
-    this.gamepads$ = this.gamepadService.gamepads$;
+    this.inputControllers$ = this.gamepadService.inputControllers$;
   }
 
   public refresh(): void {

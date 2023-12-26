@@ -12,8 +12,8 @@ export class GamepadController implements InputController {
 
   constructor(gamepad: Gamepad, window: Window, public pollingRate = 100) {
     this.id = gamepad.id;
-    this.axes = gamepad.axes.map((value, index) => new GamepadAxis(index, gamepad.index, gamepad));
-    this.buttons = gamepad.buttons.map((value, index) => new GamepadButton(index, gamepad));
+    this.axes = gamepad.axes.map((value, index) => new GamepadAxis(index, gamepad.index));
+    this.buttons = gamepad.buttons.map((value, index) => new GamepadButton(index, gamepad.index));
     //TODO PDB : pollingrate won't change the interval on change
     this.polling = interval(pollingRate).subscribe((intervalNumber) => {
       this.axes.forEach(axis => axis.poll());
@@ -33,7 +33,7 @@ class GamepadAxis implements Axis {
       ));
   }
 
-  constructor(public readonly index: number, public readonly gamepadIndex: number, private gamePad: Gamepad) {
+  constructor(public readonly index: number, public readonly gamepadIndex: number) {
     this.name = `axis ${index}`;
   }
 
@@ -46,9 +46,8 @@ class GamepadAxis implements Axis {
     this.valueSubject.next(value);
   }
 }
-
+//TODO PDB lots of duplication between buttons and axes
 class GamepadButton implements Button {
-  readonly index: number;
   readonly valueSubject = new BehaviorSubject<boolean>(false);
   private previousValue: boolean | null = null;
   public name: string;
@@ -60,16 +59,16 @@ class GamepadButton implements Button {
       ));
   }
 
-  constructor(index: number, private gamePad: Gamepad) {
-    this.index = index
+  constructor(public readonly index: number, public readonly gamepadIndex: number) {
     this.name = `button ${index}`;
   }
 
   poll() {
-    const nextValue = this.gamePad.buttons[this.index].pressed;
-    if (nextValue !== this.previousValue) {
-      this.previousValue = nextValue;
-      this.valueSubject.next(nextValue);
+    const value = navigator.getGamepads()[this.gamepadIndex]?.buttons[this.index]?.pressed;
+    if (value === undefined) {
+      console.error("axis no longer exists");
+      return
     }
+    this.valueSubject.next(value);
   }
 }

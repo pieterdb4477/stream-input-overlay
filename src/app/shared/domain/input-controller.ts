@@ -8,7 +8,7 @@ export interface InputController {
   readonly hotSwappable: boolean;
   name: string;
   pollingRate: number | 'no-polling';
-  directionalPads : DirectionPad[];
+  directionalPads : DirectionalPad[];
   thumbSticks: ThumbStick[];
 }
 
@@ -29,7 +29,7 @@ export type ThumbStick = {
   horizontalAxis: Axis;
 }
 
-export type DirectionPad = {
+export type DirectionalPad = {
   up : Button;
   down : Button;
   left : Button;

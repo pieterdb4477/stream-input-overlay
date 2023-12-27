@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {DirectionPad} from "../../../shared/domain/input-controller";
+import {DirectionalPad} from "../../../shared/domain/input-controller";
 import {AsyncPipe} from "@angular/common";
 
 @Component({
@@ -12,7 +12,7 @@ import {AsyncPipe} from "@angular/common";
   styleUrl: './visualizer-directional-pad.component.scss'
 })
 export class VisualizerDirectionalPadComponent {
-  @Input() directionalPad!: DirectionPad;
+  @Input() directionalPad!: DirectionalPad;
 
 
 

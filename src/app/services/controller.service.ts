@@ -2,7 +2,7 @@ import {Inject, Injectable, OnInit} from '@angular/core';
 import {DOCUMENT} from "@angular/common";
 import {BehaviorSubject, EMPTY, fromEvent, Observable, Subject} from "rxjs";
 import {InputController} from "../shared/domain/input-controller";
-import {GamepadController} from "../shared/domain/gamepad-controller";
+import {GamepadController} from "../shared/domain/gamepad/gamepad-controller";
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +38,7 @@ export class ControllerService {
       this.inputControllers = [];
       return;
     }
-    this.inputControllers = gamepads.map(gamepad => new GamepadController(gamepad));
+    this.inputControllers = gamepads.map(gamepad => GamepadController.fromNavigatorDetectedGamepad(gamepad));
   }
 
   private set inputControllers(inputController: InputController[]) {

@@ -1,0 +1,15 @@
+$directions: 'up', 'down', 'left', 'right';
+svg path {
+  stroke: var(--bs-body-color);
+  fill:var(--bs-body-color);;
+  fill-opacity:0;
+  stroke-width:4;
+  stroke-dasharray:none;
+  stroke-opacity:1;
+  transition: fill-opacity 300ms;
+}
+@each $direction in $directions {
+  .#{$direction}-active .button-#{$direction} {
+    fill-opacity: 0.9;
+  }
+}

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="thumbstick.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#1d1f25"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.1476675"
+     inkscape:cx="319.34338"
+     inkscape:cy="150.30486"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g10">
+    <sodipodi:guide
+       position="-3.4335327e-08,512"
+       orientation="250,0"
+       id="guide4"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="-3.4335327e-08,262"
+       orientation="0,250.00001"
+       id="guide5"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="250.00001,262"
+       orientation="-250,0"
+       id="guide6"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="250.00001,512"
+       orientation="0,-250.00001"
+       id="guide7"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient9"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="0.63895488"
+         id="stop10" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0.5;"
+         offset="0.88598573"
+         id="stop9" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient9"
+       id="radialGradient10"
+       cx="250.00374"
+       cy="250.11263"
+       fx="250.00374"
+       fy="250.11263"
+       r="91.954269"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <circle
+     style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:4;stroke-opacity:0.5"
+     id="path7"
+     cx="248.91457"
+     cy="248.91457"
+     r="223.03731"
+     inkscape:label="Back" />
+  <g
+     id="g10"
+     inkscape:label="StickAndArrow">
+    <path
+       id="rect10"
+       style="fill:none;stroke:#ffffff;stroke-width:4;stroke-opacity:0.5"
+       d="m 249.2011,87.133256 28.75397,57.507934 h -57.50794 z"
+       sodipodi:nodetypes="cccc"
+       inkscape:label="Arrow" />
+    <circle
+       style="fill:url(#radialGradient10);fill-opacity:1;stroke:#ffffff;stroke-width:4;stroke-opacity:0.5"
+       id="path8"
+       cx="250.00374"
+       cy="250.11263"
+       r="89.954269"
+       inkscape:label="Stick" />
+  </g>
+</svg>

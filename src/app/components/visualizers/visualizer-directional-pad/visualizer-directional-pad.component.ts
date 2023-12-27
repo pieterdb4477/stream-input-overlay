@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {DirectionPad} from "../../../shared/domain/input-controller";
+import {DirectionPad, ThumbStick} from "../../../shared/domain/input-controller";
 import {AsyncPipe} from "@angular/common";
 
 @Component({
@@ -13,7 +13,4 @@ import {AsyncPipe} from "@angular/common";
 })
 export class VisualizerDirectionalPadComponent {
   @Input() directionalPad!: DirectionPad;
-
-
-
 }

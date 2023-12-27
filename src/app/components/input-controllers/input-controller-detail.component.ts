@@ -7,6 +7,7 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {
   VisualizerDirectionalPadComponent
 } from "../visualizers/visualizer-directional-pad/visualizer-directional-pad.component";
+import {VisualizerThumbstickComponent} from "../visualizers/visualizer-thumbstick/visualizer-thumbstick.component";
 
 @Component({
   selector: 'app-input-controller-detail',
@@ -19,7 +20,8 @@ import {
     ReactiveFormsModule,
     NgIf,
     JsonPipe,
-    VisualizerDirectionalPadComponent
+    VisualizerDirectionalPadComponent,
+    VisualizerThumbstickComponent,
   ],
   templateUrl: './input-controller-detail.component.html',
   styleUrl: './input-controller-detail.component.scss'

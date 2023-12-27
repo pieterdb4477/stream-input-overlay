@@ -24,7 +24,7 @@ export class GamepadController implements InputController {
     });
   }
 
-  static fromNavigatorDetectedGamepad(gamepad: Gamepad, pollingRate: number = 100): GamepadController {
+  static fromNavigatorDetectedGamepad(gamepad: Gamepad, pollingRate: number = 50): GamepadController {
     const gamepadController = new GamepadController(
         this.parseId(gamepad),
         gamepad.axes.map((value, index) => new GamepadAxis(index, gamepad.index)),
@@ -71,10 +71,11 @@ export class GamepadController implements InputController {
       {
         verticalAxis: this.axes[1],
         horizontalAxis: this.axes[0]
-      }, {
-        verticalAxis: this.axes[3],
-        horizontalAxis: this.axes[2]
-      }
+      },
+      // {
+      //   verticalAxis: this.axes[3],
+      //   horizontalAxis: this.axes[2]
+      // }
     ]
   }
 

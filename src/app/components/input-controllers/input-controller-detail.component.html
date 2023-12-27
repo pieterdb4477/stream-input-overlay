@@ -45,10 +45,7 @@
             <!-- TODO PDB: don't show this if < 2 axis -->
             <h5>Thumbsticks</h5>
             <div *ngFor="let thumbStick of controller.thumbSticks">
-              Horizontal
-              <app-visualizer-slider [value]="(thumbStick.horizontalAxis.value | async)"></app-visualizer-slider>
-              Vertical
-              <app-visualizer-slider [value]="(thumbStick.verticalAxis.value | async)"></app-visualizer-slider>
+              <app-visualizer-thumbstick [thumbStick]="thumbStick"></app-visualizer-thumbstick>
             </div>
             <div>
               <button class="btn btn-link">Create thumbstick</button>

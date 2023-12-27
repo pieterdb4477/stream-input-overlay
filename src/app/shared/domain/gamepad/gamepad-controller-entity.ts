@@ -17,7 +17,6 @@ abstract class GamepadEntity<T extends number | boolean> {
 
   get value(): Observable<T> {
     return this.valueSubject.pipe(
-      distinct(),
     );
   }
 
@@ -42,9 +41,11 @@ export class GamepadAxis extends GamepadEntity<number> implements Axis {
     super(0, `${index}`, index);
   }
 
-  protected retrieveNextValue(): number {
-    return navigator.getGamepads()[this.gamepadIndex]?.axes[this.index] || 0;
+  private precision = 100;
 
+  protected retrieveNextValue(): number {
+    let number = navigator.getGamepads()[this.gamepadIndex]?.axes[this.index] || 0;
+    return Math.round((number * this.precision)) / this.precision;
   }
 
 }

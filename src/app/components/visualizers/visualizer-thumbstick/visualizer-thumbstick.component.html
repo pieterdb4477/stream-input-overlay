@@ -9,51 +9,51 @@
     id="defs1">
     <linearGradient
       id="linearGradient9"
-      >
+    >
       <stop
         style="stop-color:#000000;stop-opacity:0;"
         offset="0.63895488"
-        id="stop10" />
+        id="stop10"/>
       <stop
         style="stop-color:#ffffff;stop-opacity:0.5;"
         offset="0.88598573"
-        id="stop9" />
+        id="stop9"/>
     </linearGradient>
-    <radialGradient
-      xlink:href="#linearGradient9"
-      id="radialGradient10"
-      [attr.cx]="horizontalPosition"
-      [attr.cy]="verticalPosition"
-      [attr.fx]="horizontalPosition"
-      [attr.fy]="verticalPosition"
-      r="92"
-      gradientUnits="userSpaceOnUse" />
   </defs>
   <circle
     style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:4;stroke-opacity:0.5"
     id="Back"
     cx="250"
     cy="250"
-    r="223"
+    [attr.r]="backCircleRadius"
   />
-  <g
-    id="StickAndArrow">
-    <path
-      id="Arrow"
-      style="fill:none;stroke:#ffffff;stroke-width:4;stroke-opacity:0.5"
-      d="m 249.2011,87.133256 28.75397,57.507934 h -57.50794 z" />
-    <circle
-      style="fill:url(#radialGradient10);fill-opacity:1;stroke:#ffffff;stroke-width:4;stroke-opacity:0.5"
-      id="Stick"
-      [attr.cx]="horizontalPosition"
-      [attr.cy]="verticalPosition"
-      r="90"
-    />
-  </g>
+  <circle
+    style="fill:var(--bs-body-bg); stroke: var(--bs-body-color); stroke-width: 2px"
+    id="Stick"
+    [attr.cx]="horizontalPosition"
+    [attr.cy]="verticalPosition"
+    r="90"
+  />
+  <circle
+    style="fill:transparent;stroke:#ffffff;stroke-width:12;stroke-opacity:0.5"
+    id="Stick"
+    [attr.cx]="horizontalPosition"
+    [attr.cy]="verticalPosition"
+    r="90"
+  />
+  <circle
+    class="blip"
+    style="fill:var(--bs-body-color);stroke:#ffffff;stroke-width:12;stroke-opacity:0.5"
+    id="Stick"
+    [attr.cx]="blipPosition[0]"
+    [attr.cy]="blipPosition[1]"
+    r="10"
+  />
 </svg>
 <pre>
-  x {{horizontalValue}}
-  y {{verticalValue}}
-  h {{horizontalPosition}}
-  v {{verticalPosition}}
+  xv {{ horizontalValue }}
+  yv {{ verticalValue }}
+  xp {{ horizontalPosition }}
+  yp {{ verticalPosition }}
+  r {{ angle }}
 </pre>

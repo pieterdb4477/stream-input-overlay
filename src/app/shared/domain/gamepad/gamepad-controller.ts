@@ -72,10 +72,10 @@ export class GamepadController implements InputController {
         verticalAxis: this.axes[1],
         horizontalAxis: this.axes[0]
       },
-      // {
-      //   verticalAxis: this.axes[3],
-      //   horizontalAxis: this.axes[2]
-      // }
+      {
+        verticalAxis: this.axes[3],
+        horizontalAxis: this.axes[2]
+      }
     ]
   }
 

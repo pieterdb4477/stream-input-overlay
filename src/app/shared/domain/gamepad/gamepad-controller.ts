@@ -1,4 +1,4 @@
-import {DirectionPad, InputController, ThumbStick} from "../input-controller";
+import {DirectionalPad, InputController, ThumbStick} from "../input-controller";
 import {interval, Subscription} from "rxjs";
 import {GamepadAxis, GamepadButton} from "./gamepad-controller-entity";
 
@@ -6,7 +6,7 @@ export class GamepadController implements InputController {
 
   private polling: Subscription;
   readonly kind = 'GamePad';
-  directionalPads: DirectionPad[] = [];
+  directionalPads: DirectionalPad[] = [];
   thumbSticks: ThumbStick[] = [];
   readonly hotSwappable = true;
 

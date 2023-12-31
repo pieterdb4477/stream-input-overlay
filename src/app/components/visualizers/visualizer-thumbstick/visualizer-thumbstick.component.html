@@ -1,4 +1,5 @@
 <svg
+  [class.active]="active"
   width="125"
   height="125"
   viewBox="0 0 500 500"
@@ -28,14 +29,8 @@
     [attr.r]="backCircleRadius"
   />
   <circle
-    style="fill:var(--bs-body-bg); stroke: var(--bs-body-color); stroke-width: 2px"
-    id="Stick"
-    [attr.cx]="horizontalPosition"
-    [attr.cy]="verticalPosition"
-    r="90"
-  />
-  <circle
-    style="fill:transparent;stroke:#ffffff;stroke-width:12;stroke-opacity:0.5"
+    class="stick"
+    style="fill:var(--bs-secondary-bg); stroke: var(--bs-body-color); stroke-width: 10px"
     id="Stick"
     [attr.cx]="horizontalPosition"
     [attr.cy]="verticalPosition"
@@ -50,10 +45,3 @@
     r="10"
   />
 </svg>
-<pre>
-  xv {{ horizontalValue }}
-  yv {{ verticalValue }}
-  xp {{ horizontalPosition }}
-  yp {{ verticalPosition }}
-  r {{ angle }}
-</pre>

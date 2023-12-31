@@ -26,19 +26,23 @@ export class VisualizerThumbstickComponent {
    * @private
    */
   private readonly MAX_OFFSET = 100;
+  private readonly DEAD_ZONE = .1;
 
   public readonly backCircleRadius = 230;
 
   public horizontalPosition: number = this.MIDDLE;
   public verticalPosition: number = this.MIDDLE;
-  public horizontalPosition2: number = this.MIDDLE;
-  public verticalPosition2: number = this.MIDDLE;
-
   public horizontalValue: number = 0;
   public verticalValue: number = 0;
 
   public angle: number = 0;
   public blipPosition: [number, number] = [this.MIDDLE, 0];
+  public force: number = 0;
+
+
+  public get active(): boolean {
+    return this.force > this.DEAD_ZONE;
+  }
 
   @Input()
   set thumbStick(thumbStick: ThumbStick) {
@@ -47,7 +51,6 @@ export class VisualizerThumbstickComponent {
         this.horizontalValue = nextHorizontalValue;
         const distance = nextHorizontalValue * this.MAX_OFFSET;
         this.horizontalPosition = this.MIDDLE + distance;
-        this.horizontalPosition2 = this.MIDDLE + (distance * .8);
       }
     )
     thumbStick.verticalAxis.value.subscribe(
@@ -55,17 +58,21 @@ export class VisualizerThumbstickComponent {
         this.verticalValue = nextVerticalValue;
         const distance = nextVerticalValue * this.MAX_OFFSET;
         this.verticalPosition = this.MIDDLE + distance;
-        this.verticalPosition2 = this.MIDDLE + (distance * .8);
       }
     )
     combineLatest({
       horizontal: thumbStick.horizontalAxis.value,
       vertical: thumbStick.verticalAxis.value
     }).subscribe(({horizontal, vertical}) => {
-      this.angle = lineAngle([[0, 0], [horizontal, vertical]]) - 90;
-      let lineToBlip: Line = [[this.MIDDLE, this.MIDDLE], [this.MIDDLE, this.MIDDLE + (this.backCircleRadius)]]
-      lineToBlip = lineRotate(lineToBlip, this.angle, [this.MIDDLE, this.MIDDLE]);
-      this.blipPosition = lineToBlip[1];
+      this.force = Math.max(Math.abs(horizontal), Math.abs(vertical));
+      if (this.active) {
+        this.angle = lineAngle([[0, 0], [horizontal, vertical]]) - 90;
+        let lineToBlip: Line = [[this.MIDDLE, this.MIDDLE], [this.MIDDLE, this.MIDDLE + (this.backCircleRadius)]]
+        lineToBlip = lineRotate(lineToBlip, this.angle, [this.MIDDLE, this.MIDDLE]);
+        this.blipPosition = lineToBlip[1];
+      } else {
+        this.angle = 0;
+      }
     })
   }
 }

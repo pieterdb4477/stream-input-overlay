@@ -4,8 +4,8 @@ import {InputControllersComponent} from "./components/input-controllers/input-co
 import {BoardsComponent} from "./components/boards/boards.component";
 
 export const routes: Routes = [
-  {path: '**', redirectTo: "boards"},
   {path: 'boards', component: BoardsComponent},
   {path: 'debug', component: DebugComponent},
   {path: 'controllers', component: InputControllersComponent},
+  {path: '**', redirectTo: "boards"},
 ];

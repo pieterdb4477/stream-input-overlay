@@ -3,6 +3,12 @@ import {ThumbStick} from "../../../shared/domain/input-controller";
 import {AsyncPipe} from "@angular/common";
 import {combineLatest} from "rxjs";
 import {Line, lineAngle, lineRotate} from 'geometric'
+import {
+  InputKind,
+  Visualizer,
+  VisualizerContext,
+  VisualizerDescription
+} from "../../../shared/domain/visualizer-configuration";
 
 @Component({
   selector: 'app-visualizer-thumbstick',
@@ -13,35 +19,23 @@ import {Line, lineAngle, lineRotate} from 'geometric'
   templateUrl: './visualizer-thumbstick.component.html',
   styleUrl: './visualizer-thumbstick.component.scss'
 })
-export class VisualizerThumbstickComponent {
+export class VisualizerThumbstickComponent implements Visualizer {
 
-  /**
-   * Amount of circles of the middle of the SVG image.
-   * @private
-   */
-  private readonly MIDDLE = 250;
+  description: VisualizerDescription = {
+    title: 'Thumbstick',
+    description: 'Shows a thumbstick graphic from top-down moving around',
+    inputs: [
+      {
+        kind: InputKind.ThumbStick,
+        label: 'Thumbstick',
+        key: 'thumbstick'
+      }
+    ]
+  }
 
-  /**
-   * Max amount of movement the thumb stick may do from the
-   * @private
-   */
-  private readonly MAX_OFFSET = 100;
-  private readonly DEAD_ZONE = .1;
-
-  public readonly backCircleRadius = 230;
-
-  public horizontalPosition: number = this.MIDDLE;
-  public verticalPosition: number = this.MIDDLE;
-  public horizontalValue: number = 0;
-  public verticalValue: number = 0;
-
-  public angle: number = 0;
-  public blipPosition: [number, number] = [this.MIDDLE, 0];
-  public force: number = 0;
-
-
-  public get active(): boolean {
-    return this.force > this.DEAD_ZONE;
+  @Input()
+  set context(context: VisualizerContext) {
+    this.thumbStick = context.thumbSticks['thumbstick'];
   }
 
   @Input()
@@ -75,4 +69,35 @@ export class VisualizerThumbstickComponent {
       }
     })
   }
+
+
+  /**
+   * Amount of circles of the middle of the SVG image.
+   * @private
+   */
+  private readonly MIDDLE = 250;
+
+  /**
+   * Max amount of movement the thumb stick may do from the
+   * @private
+   */
+  private readonly MAX_OFFSET = 100;
+  private readonly DEAD_ZONE = .1;
+
+  public readonly backCircleRadius = 230;
+
+  public horizontalPosition: number = this.MIDDLE;
+  public verticalPosition: number = this.MIDDLE;
+  public horizontalValue: number = 0;
+  public verticalValue: number = 0;
+
+  public angle: number = 0;
+  public blipPosition: [number, number] = [this.MIDDLE, 0];
+  public force: number = 0;
+
+
+  public get active(): boolean {
+    return this.force > this.DEAD_ZONE;
+  }
+
 }

@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {DirectionalPad, ThumbStick} from "../../../shared/domain/input-controller";
 import {AsyncPipe} from "@angular/common";
+import {DirectionalPad} from "../../../shared/domain/input/input-entities";
 
 @Component({
   selector: 'app-visualizer-directional-pad',

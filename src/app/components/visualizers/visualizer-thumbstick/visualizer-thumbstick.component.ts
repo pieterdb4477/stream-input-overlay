@@ -1,14 +1,14 @@
 import {Component, Input} from '@angular/core';
-import {ThumbStick} from "../../../shared/domain/input-controller";
 import {AsyncPipe} from "@angular/common";
 import {combineLatest} from "rxjs";
 import {Line, lineAngle, lineRotate} from 'geometric'
 import {
-  InputKind,
   Visualizer,
   VisualizerContext,
   VisualizerDescription
 } from "../../../shared/domain/visualizer-configuration";
+
+import {InputEntityKind, ThumbStick} from "../../../shared/domain/input/input-entities";
 
 @Component({
   selector: 'app-visualizer-thumbstick',
@@ -26,7 +26,7 @@ export class VisualizerThumbstickComponent implements Visualizer {
     description: 'Shows a thumbstick graphic from top-down moving around',
     inputs: [
       {
-        kind: InputKind.ThumbStick,
+        kind: InputEntityKind.ThumbStick,
         label: 'Thumbstick',
         key: 'thumbstick'
       }
@@ -40,24 +40,13 @@ export class VisualizerThumbstickComponent implements Visualizer {
 
   @Input()
   set thumbStick(thumbStick: ThumbStick) {
-    thumbStick.horizontalAxis.value.subscribe(
-      nextHorizontalValue => {
-        this.horizontalValue = nextHorizontalValue;
-        const distance = nextHorizontalValue * this.MAX_OFFSET;
-        this.horizontalPosition = this.MIDDLE + distance;
-      }
-    )
-    thumbStick.verticalAxis.value.subscribe(
-      nextVerticalValue => {
-        this.verticalValue = nextVerticalValue;
-        const distance = nextVerticalValue * this.MAX_OFFSET;
-        this.verticalPosition = this.MIDDLE + distance;
-      }
-    )
-    combineLatest({
-      horizontal: thumbStick.horizontalAxis.value,
-      vertical: thumbStick.verticalAxis.value
-    }).subscribe(({horizontal, vertical}) => {
+    thumbStick.value.subscribe(({horizontal, vertical}) => {
+      this.horizontalValue = horizontal;
+      const hDistance = horizontal * this.MAX_OFFSET;
+      this.horizontalPosition = this.MIDDLE + hDistance;
+      this.verticalValue = vertical;
+      const vDistance = vertical * this.MAX_OFFSET;
+      this.verticalPosition = this.MIDDLE + vDistance;
       this.force = Math.max(Math.abs(horizontal), Math.abs(vertical));
       if (this.active) {
         this.angle = lineAngle([[0, 0], [horizontal, vertical]]) - 90;

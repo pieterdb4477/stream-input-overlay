@@ -23,8 +23,8 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let axis of controller.axes">
-                <td>{{ axis.index }}</td>
+              <tr *ngFor="let axis of axes">
+                <td>{{ axis.name }}</td>
                 <td>
                   <app-visualizer-slider [value]="(axis.value | async)"></app-visualizer-slider>
                 </td>
@@ -35,8 +35,8 @@
           <div class="col-12 col-md-6 p-0 p-md-3" style="max-width: 200px">
             <h5>Buttons</h5>
             <div class="d-flex flex-wrap">
-              <div *ngFor="let button of controller.buttons">
-                <app-visualizer-button [value]="button.index" [buttonActive]="(button.value | async)">
+              <div *ngFor="let button of buttons">
+                <app-visualizer-button [value]="button.name" [buttonActive]="(button.value | async)">
                 </app-visualizer-button>
               </div>
             </div>
@@ -44,7 +44,8 @@
           <div class="col-12 col-md-6 p-0 p-md-3">
             <!-- TODO PDB: don't show this if < 2 axis -->
             <h5>Thumbsticks</h5>
-            <div *ngFor="let thumbStick of controller.thumbSticks">
+            <div *ngFor="let thumbStick of thumbsticks">
+              <h6 [innerText]="thumbStick.name"></h6>
               <app-visualizer-thumbstick [thumbStick]="thumbStick"></app-visualizer-thumbstick>
             </div>
             <div>
@@ -54,7 +55,8 @@
           <div class="col-12 col-md-6 p-0 p-md-3">
             <!-- TODO PDB: don't show this if < 4 buttons -->
             <h5>Directional Pads</h5>
-            <div *ngFor="let directionalPad of controller.directionalPads">
+            <div *ngFor="let directionalPad of directionalPads">
+              <h6 [innerText]="directionalPad.name"></h6>
               <app-visualizer-directional-pad [directionalPad]="directionalPad">
               </app-visualizer-directional-pad>
             </div>

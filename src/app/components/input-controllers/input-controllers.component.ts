@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Observable} from "rxjs";
-import {InputController} from "../../shared/domain/input-controller";
+import {InputController} from "../../shared/domain/input/input-controller";
 import {ControllerService} from "../../services/controller.service";
 import {AsyncPipe, NgForOf} from "@angular/common";
 import {VisualizerSliderComponent} from "../visualizers/visualizer-slider/visualizer-slider.component";

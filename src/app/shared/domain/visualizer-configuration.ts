@@ -1,4 +1,4 @@
-import {Axis, Button, DirectionalPad, ThumbStick} from "./input-controller";
+import {Axis, Button, DirectionalPad, InputEntityKind, ThumbStick} from "./input/input-entities";
 
 /**
  * Interface to be implemented by each component that
@@ -36,7 +36,7 @@ export type VisualizerContext = {
 }
 
 type VisualizerInputs = {
-  kind: InputKind,
+  kind: InputEntityKind,
   /**
    * Describes to what the input will be bound.
    */
@@ -47,8 +47,4 @@ type VisualizerInputs = {
   key: string,
 }
 
-
-export enum InputKind {
-  'Button', 'Axis', 'DirectionalPad', 'ThumbStick'
-}
 

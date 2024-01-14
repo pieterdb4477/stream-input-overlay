@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {interval, Observable, Subscription} from "rxjs";
-import {InputController} from "../../shared/domain/input-controller";
+import {InputController} from "../../shared/domain/input/input-controller";
 
 @Component({
   selector: 'app-debug',

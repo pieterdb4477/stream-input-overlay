@@ -1,7 +1,7 @@
 import {Component, ComponentFactoryResolver, ComponentRef, Type, ViewChild, ViewContainerRef} from '@angular/core';
-import {ThumbStick} from "../../shared/domain/input-controller";
 import {VisualizerThumbstickComponent} from "../visualizers/visualizer-thumbstick/visualizer-thumbstick.component";
 import {interval, map} from "rxjs";
+import {ThumbStick} from "../../shared/domain/input/input-entities";
 
 @Component({
   selector: 'app-boards',
@@ -23,21 +23,15 @@ export class BoardsComponent {
 
   public addThumbSticks(): void {
     const visualizerThumbstickComponent = new VisualizerThumbstickComponent();
-    const thumbStick: ThumbStick = {
-      verticalAxis: {
-        value: interval(100).pipe(map(v => (v / 10) % 2 - 1)),
-        index: 0,
-        name: ''
-      },
-      horizontalAxis: {
-        value: interval(100).pipe(map(v => (v / 10) % 2 - 1)),
-        index: 0,
-        name: ''
-      },
-    }
+    const observables = interval(100).pipe(map(v => {
+      return {
+        horizontal: (v / 10) % 2 - 1,
+        vertical: (v / 10) % 2 - 1
+      }
+    }));
     // Create component dynamically inside the ng-template
     const componentRef = this.container.createComponent(VisualizerThumbstickComponent);
-    componentRef.setInput('thumbStick', thumbStick);
+    componentRef.setInput('thumbStick', new ThumbStick('thumbstick', observables, 'test'));
     // Push the component so that we can keep track of which components are created
     this.components.push(componentRef);
   }

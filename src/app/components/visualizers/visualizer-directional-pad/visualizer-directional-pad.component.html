@@ -1,8 +1,8 @@
 <svg
-  [class.up-active]="(directionalPad.up.value | async)"
-  [class.down-active]="(directionalPad.down.value | async)"
-  [class.left-active]="(directionalPad.left.value | async)"
-  [class.right-active]="(directionalPad.right.value | async)"
+  [class.up-active]="(directionalPad.value | async)?.up"
+  [class.down-active]="(directionalPad.value | async)?.down"
+  [class.left-active]="(directionalPad.value | async)?.left"
+  [class.right-active]="(directionalPad.value | async)?.right"
   width="128"
   height="128"
   viewBox="0 0 512 512">
